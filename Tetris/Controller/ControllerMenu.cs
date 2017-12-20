@@ -13,7 +13,7 @@ namespace Tetris.Controller
         /// <summary>
         /// Форма меню
         /// </summary>
-        private FormGame _formGame ;
+        private FormGame _formGame;
        
         /// <summary>
         /// Главное меню

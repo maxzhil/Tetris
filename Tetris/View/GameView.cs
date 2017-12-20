@@ -9,8 +9,7 @@ namespace Tetris
     /// Вью игры
     /// </summary>
     public class GameView : AbstractView
-    {
-                
+    {                
         /// <summary>
         /// Изображение I - образной фигуры
         /// </summary>
@@ -94,17 +93,17 @@ namespace Tetris
         { 
             InitializeTexture();
             _model = parModel;
-            InitializeForm(parFormGame);
+            _formGame = parFormGame;
+            InitializeForm();
             InitializeTimer(); 
                       
         }
         /// <summary>
         /// Инициализация формы
         /// </summary>
-        /// <param name="parFormGame">Форма игры</param>
-        private void InitializeForm(FormGame parFormGame)
+        public override void InitializeForm()
         {
-            _formGame = parFormGame;
+            
             _formGame.ClientSize = new Size(380, 400);
             _formGame.MinimumSize = _formGame.Size;
             _formGame.MaximumSize = _formGame.Size;

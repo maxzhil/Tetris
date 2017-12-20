@@ -3,12 +3,12 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
 
-namespace Tetris
+namespace Tetris.View
 {
     /// <summary>
     /// Вью меню
     /// </summary>
-    public class MenuView
+    public class MenuView : AbstractView
     {
         
         /// <summary>
@@ -32,6 +32,13 @@ namespace Tetris
         /// </summary>
         public MenuView()
         {
+            InitializeForm();
+        }
+        /// <summary>
+        /// Инициализация формы
+        /// </summary>
+        public override void InitializeForm()
+        {
             _formMenu = new FormMenu();
             _formMenu.BackgroundImage = Properties.Resources.menuView;
             _formMenu.StartPosition = FormStartPosition.CenterScreen;
@@ -49,9 +56,7 @@ namespace Tetris
             _formMenu.Controls.Add(_playButton);
             _formMenu.Controls.Add(_scoreButton);
             _formMenu.Controls.Add(_exitButton);
-
         }
-
         /// <summary>
         /// Запуск программы
         /// </summary>

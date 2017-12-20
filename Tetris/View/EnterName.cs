@@ -2,12 +2,12 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Tetris
+namespace Tetris.View
 {
     /// <summary>
     /// Вью формы ввода имени
     /// </summary>
-    public class EnterName
+    public class EnterName : AbstractView
     {
         /// <summary>
         /// Форма ввода
@@ -47,7 +47,7 @@ namespace Tetris
         /// <summary>
         /// Инициализация формы
         /// </summary>
-        public void InitializeForm()
+        public override void InitializeForm()
         {
             _enterForm.Size = new Size(200, 200);
             _enterForm.MinimumSize = _enterForm.Size;

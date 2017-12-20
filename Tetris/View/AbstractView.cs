@@ -7,7 +7,14 @@ using System.Windows.Forms;
 
 namespace Tetris.View
 {
+    /// <summary>
+    /// Абстрактная вью
+    /// </summary>
     public abstract class AbstractView
-    { 
+    {
+        /// <summary>
+        /// Инициализация формы
+        /// </summary>
+        public abstract void InitializeForm();
     }
 }

@@ -6,7 +6,7 @@ namespace Tetris.View
     /// <summary>
     /// Вью просмотра рекордов
     /// </summary>
-    public class ViewScore
+    public class ViewScore : AbstractView
     {
         /// <summary>
         /// Таблица
@@ -28,16 +28,21 @@ namespace Tetris.View
         public ViewScore(Model parModel, FormViewRecord parFormViewRecord)
         {
             _model = parModel;
-            _formViewRecord = parFormViewRecord;
+            _formViewRecord = parFormViewRecord;    
+
+        }
+        /// <summary>
+        /// Инициализация формы
+        /// </summary>
+        public override void InitializeForm()
+        {
             _formViewRecord.StartPosition = FormStartPosition.CenterScreen;
-            _formViewRecord.Size = new Size(400,600);
+            _formViewRecord.Size = new Size(400, 600);
             _formViewRecord.MaximizeBox = false;
             _dataGrid.Location = new Point(10, 10);
             _dataGrid.Width = 300;
             _dataGrid.Height = 500;
             _formViewRecord.Controls.Add(_dataGrid);
-            
-
         }
         /// <summary>
         /// Таблица
