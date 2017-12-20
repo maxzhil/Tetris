@@ -28,7 +28,8 @@ namespace Tetris.View
         public ViewScore(Model parModel, FormViewRecord parFormViewRecord)
         {
             _model = parModel;
-            _formViewRecord = parFormViewRecord;    
+            _formViewRecord = parFormViewRecord;
+            InitializeForm();
 
         }
         /// <summary>
