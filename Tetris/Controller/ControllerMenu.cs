@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using Tetris.View;
 
 namespace Tetris.Controller
 {
