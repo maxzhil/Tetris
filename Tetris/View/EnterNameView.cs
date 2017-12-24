@@ -7,12 +7,20 @@ namespace Tetris.View
     /// <summary>
     /// Вью формы ввода имени
     /// </summary>
-    public class EnterName : AbstractView
+    public class EnterNameView : AbstractView
     {
         /// <summary>
         /// Форма ввода
         /// </summary>
         private FormEnterName _enterForm;
+        /// <summary>
+        /// Имя
+        /// </summary>
+        private Label _name = new Label();
+        /// <summary>
+        /// Очки
+        /// </summary>
+        private Label _score = new Label();
         /// <summary>
         /// Поле ввода имени
         /// </summary>
@@ -36,12 +44,10 @@ namespace Tetris.View
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="parForm">Форма</param>
         /// <param name="parModel">Модель</param>
-        public EnterName(FormEnterName parForm,Model parModel)
+        public EnterNameView(Model parModel)
         {
             _model = parModel;
-            _enterForm = parForm;
             InitializeForm();
         }
         /// <summary>
@@ -49,24 +55,33 @@ namespace Tetris.View
         /// </summary>
         public override void InitializeForm()
         {
-            _enterForm.Size = new Size(200, 200);
+            _enterForm = new FormEnterName();
+            _enterForm.Size = new Size(230, 200);
             _enterForm.MinimumSize = _enterForm.Size;
             _enterForm.MaximumSize = _enterForm.Size;
-            _enterForm.Text = "Tetris";
+            _enterForm.Text = "Enter name";
             _enterForm.MaximizeBox = false;
-            _textBoxName.Location = new Point(10, 10);
+            _name.Location = new Point(10, 5);
+            _name.Text = "Name :";
+            _name.Height = 15;
+            _enterForm.Controls.Add(_name);
+            _textBoxName.Location = new Point(10, 25);
             _enterForm.Controls.Add(_textBoxName);
-            _textBoxScore.Location = new Point(10, 50);
+            _score.Location = new Point(10, 50);
+            _score.Text = "Score :";
+            _score.Height = 15;
+            _enterForm.Controls.Add(_score);
+            _textBoxScore.Location = new Point(10, 70);
             _textBoxScore.Text = "" + _model.Score;
             _textBoxScore.ReadOnly = true;
             _enterForm.Controls.Add(_textBoxScore);
             _buttonCancel.Text = "Cancel";
-            _buttonCancel.Location = new Point(50, 130);
+            _buttonCancel.Location = new Point(60, 130);
             _buttonCancel.BackColor = Color.White;
             _enterForm.Controls.Add(_buttonCancel);
             _buttonSave.Text = "Save";
             _buttonSave.BackColor = Color.White;
-            _buttonSave.Location = new Point(50, 100);
+            _buttonSave.Location = new Point(60, 100);
             _enterForm.Controls.Add(_buttonSave);
         }
 

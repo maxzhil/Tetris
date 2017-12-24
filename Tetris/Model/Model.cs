@@ -11,6 +11,10 @@ namespace Tetris
     public class Model
     {
         /// <summary>
+        /// Экземпляр класса
+        /// </summary>
+        private static Model _instance = null;
+        /// <summary>
         /// Поле игры
         /// </summary>
         private TetrisGrid _tetrisGrid = new TetrisGrid();
@@ -46,9 +50,22 @@ namespace Tetris
         /// <summary>
         /// Конструктор
         /// </summary>
-        public Model()
+        private Model()
         {
             InitializeMatch();
+        }
+
+        /// <summary>
+        /// Получение экземпляра класса
+        /// </summary>
+        /// <returns>Экземпляр класса</returns>
+        public static Model GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new Model();
+            }
+            return _instance;
         }
 
         /// <summary>
@@ -154,7 +171,6 @@ namespace Tetris
             // Если это первый старт, обе части должны быть извлечены
             if (_currentShape == null && _nextShape == null)
             {
-
                 _currentShape = _shapeCreator.CreateShape();
                 _nextShape = _shapeCreator.CreateShape();
             }
@@ -176,12 +192,17 @@ namespace Tetris
         private bool CanMove(int x, int y)
         {
             bool canMove = true;
-                       
-            for (int i = y, line = 0; i < (y + CurrentShapeLines); i++, line++)
-                for (int j = x, column = 0; j < (x + CurrentShapeColumns); j++, column++)
-                    if ((_tetrisGrid.Grid[i, j] != 0) && (_currentShape.Pattern[line, column] != 0))
-                        canMove = false;
 
+            for (int i = y, line = 0; i < (y + CurrentShapeLines); i++, line++)
+            {
+                for (int j = x, column = 0; j < (x + CurrentShapeColumns); j++, column++)
+                {
+                    if ((_tetrisGrid.GameGrid[i, j] != 0) && (_currentShape.Pattern[line, column] != 0))
+                    {
+                        canMove = false;
+                    }
+                }
+            }
             return canMove;
         }
         /// <summary>
@@ -190,9 +211,15 @@ namespace Tetris
         private void FixedShape()
         {
             for (int i = _currentShape.Y, lineShape = 0; i < (_currentShape.Y + CurrentShapeLines); i++, lineShape++)
+            {
                 for (int j = _currentShape.X, columnShape = 0; (j < (_currentShape.X + CurrentShapeColumns)); j++, columnShape++)
+                {
                     if (_currentShape.Pattern[lineShape, columnShape] != 0)
-                        _tetrisGrid.Grid[i, j] = _currentShape.Pattern[lineShape, columnShape];
+                    {
+                        _tetrisGrid.GameGrid[i, j] = _currentShape.Pattern[lineShape, columnShape];
+                    }
+                }
+            }
         }
         /// <summary>
         /// Проверка поворота
@@ -201,25 +228,39 @@ namespace Tetris
         private bool CanRotate()
         {
             bool canRotate = true;
-            // Временная матрицу вращения после текущей
+            // Временная матрица вращения после текущей
             int[,] rotationTemp = _currentShape.NextRotation(_currentShape.Rotation);
             // Новые x и y для вращения
-            int nextX = _currentShape.NextRotationX(),
-                nextY = _currentShape.NextRotationY();
+            int nextX = _currentShape.NextRotationX();
+            int nextY = _currentShape.NextRotationY();
             // Выходит ли следующая сетка из сетки
-            if ((nextY + rotationTemp.GetLength(0)) > _tetrisGrid.Grid.GetLength(0))
+            if ((nextY + rotationTemp.GetLength(0)) > _tetrisGrid.GameGrid.GetLength(0))
+            {
                 canRotate = false;
-            if ((nextX + rotationTemp.GetLength(1)) > _tetrisGrid.Grid.GetLength(1))
+            }
+            if ((nextX + rotationTemp.GetLength(1)) > _tetrisGrid.GameGrid.GetLength(1))
+            {
                 canRotate = false;
+            }
             if (nextX < 0)
+            {
                 canRotate = false;
+            }
 
-            int i, j;
             if (canRotate)
-                for (i = nextY; (i < (nextY + rotationTemp.GetLength(0))); i++)
-                    for (j = nextX; (j < (nextX + rotationTemp.GetLength(1))); j++)
-                        if (_tetrisGrid.Grid[i, j] != 0)
+            {
+                for (int i = nextY; (i < (nextY + rotationTemp.GetLength(0))); i++)
+                {
+                    for (int j = nextX; (j < (nextX + rotationTemp.GetLength(1))); j++)
+                    {
+
+                        if (_tetrisGrid.GameGrid[i, j] != 0)
+                        {
                             canRotate = false;
+                        }
+                    }
+                }
+            }
 
             return canRotate;
         }
@@ -243,7 +284,7 @@ namespace Tetris
         /// </summary>
         public void MoveRight()
         {
-            if ((_currentShape.X + CurrentShapeColumns) < _tetrisGrid.Grid.GetLength(1))
+            if ((_currentShape.X + CurrentShapeColumns) < _tetrisGrid.GameGrid.GetLength(1))
             {
                 if (CanMove(_currentShape.X + 1, _currentShape.Y))
                 {
@@ -260,14 +301,18 @@ namespace Tetris
         {
             bool fixedShape = false;
             // Проверяем, что игра все еще в игре
-            if ((_tetrisGrid.Grid[0, 4] != 0) || (_tetrisGrid.Grid[0, 3] != 0))
+            if ((_tetrisGrid.GameGrid[0, 4] != 0) || (_tetrisGrid.GameGrid[0, 3] != 0))
+            {
                 GameOver();
+            }
             else
             {
                 // Проверка, что кусок еще не находится на нижнем краю
-                if (((_currentShape.Y + CurrentShapeLines) < _tetrisGrid.Grid.GetLength(0)) &&
+                if (((_currentShape.Y + CurrentShapeLines) < _tetrisGrid.GameGrid.GetLength(0)) &&
                     (CanMove(_currentShape.X, _currentShape.Y + 1)))
+                {
                     _currentShape.Y++;
+                }
                 else
                 {
                     // Кусок больше не может двигаться, он должен быть «зафиксирован» до
@@ -287,15 +332,15 @@ namespace Tetris
         /// <returns></returns>
         public bool ShapeWheel()
         {
-            bool val = false;
+            bool flag = false;
 
             if (CanRotate())
             {
                 _currentShape.Wheel();
-                val = true;
+                flag = true;
             }
 
-            return val;
+            return flag;
         }
         /// <summary>
         /// Проверка собранности строки
@@ -305,35 +350,44 @@ namespace Tetris
         {
             bool completeLine = true;
 
-            for (int i = 0; i < _tetrisGrid.Grid.GetLength(0); i++)
+            for (int i = 0; i < _tetrisGrid.GameGrid.GetLength(0); i++)
             {
                 completeLine = true;
 
                 // Происходит, если есть хотя бы один элемент == 0, если строка не завершена
                 // и следующее, если будет пропущено. Перейдите к следующей строке (если есть)
-                for (int j = 0; (j < _tetrisGrid.Grid.GetLength(1)) && (completeLine == true); j++)
-                    if (_tetrisGrid.Grid[i, j] == 0)
+                for (int j = 0; (j < _tetrisGrid.GameGrid.GetLength(1)) && (completeLine == true); j++)
+                {
+                    if (_tetrisGrid.GameGrid[i, j] == 0)
+                    {
                         completeLine = false;
+                    }
+                }
                 if (completeLine)
                 {
                     // Получаем полную строку (i) и копируем все элементы на ней
                     // из вышеприведенной строки, то же самое, пока не дойдем до строки 0
                     // где он установлен в 0, потому что все вниз по одной строке
                     for (int k = i; k > 0; k--)
-                        for (int j = 0; j < _tetrisGrid.Grid.GetLength(1); j++)
-                            _tetrisGrid.Grid[k, j] = _tetrisGrid.Grid[k - 1, j];
+                    {
+                        for (int j = 0; j < _tetrisGrid.GameGrid.GetLength(1); j++)
+                        {
+                            _tetrisGrid.GameGrid[k, j] = _tetrisGrid.GameGrid[k - 1, j];
+                        }
+                    }
                     // септ на 0 линия 0
-                    for (int j = 0; j < _tetrisGrid.Grid.GetLength(1); j++)
-                        _tetrisGrid.Grid[0, j] = 0;
-
+                    for (int j = 0; j < _tetrisGrid.GameGrid.GetLength(1); j++)
+                    {
+                        _tetrisGrid.GameGrid[0, j] = 0;
+                    }
                     Score += 10;
-                    
+
                     if (Score % 100 == 0)
+                    {
                         Level++;
+                    }
                 }
-
             }
-
             return completeLine;
         }
 #region Свойства

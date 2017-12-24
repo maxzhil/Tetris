@@ -13,7 +13,7 @@ namespace Tetris
         private Image imageS = Tetris.Properties.Resources.imageS;
         /// <summary>
         /// Сокращенное обозначение фигуры
-        /// </summary>ы
+        /// </summary>
         private const char NAME = 'S';
         /// <summary>
         /// Координата _x
@@ -49,7 +49,7 @@ namespace Tetris
         /// Конструктор
         /// </summary>
         public ShapeS()
-        {
+        {          
             X = 3;
             Y = 0;
             this._rotation = 0;

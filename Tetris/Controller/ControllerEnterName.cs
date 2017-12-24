@@ -12,7 +12,7 @@ namespace Tetris
         /// <summary>
         /// Вью ввода имени
         /// </summary>
-        private EnterName _enterName;
+        private EnterNameView _enterNameView;
         /// <summary>
         /// Модель
         /// </summary>
@@ -20,16 +20,14 @@ namespace Tetris
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="parForm">Форма</param>
-        /// <param name="parModel">модель</param>
-        public ControllerEnterName(FormEnterName parForm,Model parModel)
+        /// <param name="parModel">Mодель</param>
+        public ControllerEnterName(Model parModel)
         {
-
             _model = parModel;
-            _enterName = new EnterName(parForm,_model);
-            _enterName.ButtonCancel.MouseClick += delegate { parForm.Close(); };
-            _enterName.ButtonSave.MouseClick += SaveScore;
-            _enterName.FormEnterName.ShowDialog();
+            _enterNameView = new EnterNameView(_model);
+            _enterNameView.ButtonCancel.MouseClick += delegate { _enterNameView.FormEnterName.Close(); };
+            _enterNameView.ButtonSave.MouseClick += SaveScore;
+            _enterNameView.FormEnterName.ShowDialog();
         }
 
         /// <summary>
@@ -39,8 +37,15 @@ namespace Tetris
         /// <param name="e"></param>
         private void SaveScore(object sender, MouseEventArgs e)
         {
-            _model.SaveScore(_enterName.TextBoxName.Text.ToString(), _model.Score);
-           _enterName.FormEnterName.Close();
+            if (_enterNameView.TextBoxName.Text == "")
+            {
+                MessageBox.Show("Enter your name");
+            }
+            else
+            {
+                _model.SaveScore(_enterNameView.TextBoxName.Text.ToString(), _model.Score);
+                _enterNameView.FormEnterName.Close();
+            }
         }
     }
 }

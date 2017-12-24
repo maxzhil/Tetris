@@ -9,7 +9,11 @@ namespace Tetris
     /// Вью игры
     /// </summary>
     public class GameView : AbstractView
-    {                
+    {
+        /// <summary>
+        /// Размер блоков
+        /// </summary>
+        private const int BLOCK_SIZE = 25;
         /// <summary>
         /// Изображение I - образной фигуры
         /// </summary>
@@ -46,16 +50,13 @@ namespace Tetris
         /// Контейнер для фигур
         /// </summary>
         private Rectangle containerShape;
-        /// <summary>
-        /// Размер блоков
-        /// </summary>
-        private const int blockSize = 25;
+       
         /// <summary>
         /// Кнопка паузы
         /// </summary>
         private Button _buttonPause = new Button();
         /// <summary>
-        /// Выход из игры11
+        /// Кнопка выхода
         /// </summary>
         private Button _buttonExit  = new Button();
         /// <summary>
@@ -89,11 +90,10 @@ namespace Tetris
         /// <summary>
         /// Конструктор
         /// </summary>
-        public GameView(Model parModel,FormGame parFormGame)
+        public GameView(Model parModel)
         { 
             InitializeTexture();
             _model = parModel;
-            _formGame = parFormGame;
             InitializeForm();
             InitializeTimer(); 
                       
@@ -103,7 +103,8 @@ namespace Tetris
         /// </summary>
         public override void InitializeForm()
         {
-            
+            _formGame = new FormGame();
+            _formGame.KeyPreview = true;
             _formGame.ClientSize = new Size(380, 400);
             _formGame.MinimumSize = _formGame.Size;
             _formGame.MaximumSize = _formGame.Size;
@@ -117,15 +118,15 @@ namespace Tetris
             _buttonExit.Location = new Point(260, 320);
             _buttonExit.BackColor = Color.White;
             _formGame.Controls.Add(_buttonExit);
-            _labelLevel.Location = new Point(260, 180);
+            _labelLevel.Location = new Point(260, 150);
             _labelLevel.BackColor = Color.CadetBlue;
             _labelLevel.Text = "Level : 1";
             _formGame.Controls.Add(_labelLevel);
-            _labelScore.Location = new Point(260, 200);
+            _labelScore.Location = new Point(260, 175);
             _labelScore.BackColor = Color.CadetBlue;
             _labelScore.Text = "Score : 0";
             _labelInfo.Location = new Point(260,220);
-            _labelInfo.Text = "Up : NumPad8 \n Left: NumPad4 \n Right: NumPad6 \n Down: NumPad5";
+            _labelInfo.Text = "MOVE \nUp : NumPad8 \nLeft: NumPad4 \nRight: NumPad6 \nDown: NumPad5";
             _labelInfo.Height = 80;
             _labelInfo.BackColor = Color.CadetBlue;
             _formGame.Controls.Add(_labelInfo);
@@ -162,8 +163,8 @@ namespace Tetris
         /// <param name="e"></param>
         public void DrawShape(Shape parShape, PaintEventArgs e)
         {
-            containerShape = new Rectangle(_model.CurrentShape.X * blockSize,
-                                           _model.CurrentShape.Y * blockSize,
+            containerShape = new Rectangle(_model.CurrentShape.X * BLOCK_SIZE,
+                                           _model.CurrentShape.Y * BLOCK_SIZE,
                                            _model.CurrentShape.Image.Width,
                                            _model.CurrentShape.Image.Height);
 
@@ -187,32 +188,39 @@ namespace Tetris
         /// <param name="e"></param>
         public void DrawBlocks(PaintEventArgs e)
         {
-            for (int i = 0; i < _model.TetrisGrid.Grid.GetLength(0); i++)
-                for (int j = 0; j < _model.TetrisGrid.Grid.GetLength(1); j++)
-                    switch (_model.TetrisGrid.Grid[i, j])
+
+            e.Graphics.FillRectangle(Brush, Sidebar);
+            for (int i = 0; i < _model.TetrisGrid.GameGrid.GetLength(0); i++)
+            {
+                for (int j = 0; j < _model.TetrisGrid.GameGrid.GetLength(1); j++)
+                {
+                    switch (_model.TetrisGrid.GameGrid[i, j])
                     {
                         case 1:
-                            e.Graphics.DrawImage(_imageI_25, j * 25, i * 25);
+                            e.Graphics.DrawImage(_imageI_25, j * BLOCK_SIZE, i * BLOCK_SIZE);
                             break;
                         case 2:
-                            e.Graphics.DrawImage(_imageO_25, j * 25, i * 25);
+                            e.Graphics.DrawImage(_imageO_25, j * BLOCK_SIZE, i * BLOCK_SIZE);
                             break;
                         case 3:
-                            e.Graphics.DrawImage(_imageL_25, j * 25, i * 25);
+                            e.Graphics.DrawImage(_imageL_25, j * BLOCK_SIZE, i * BLOCK_SIZE);
                             break;
                         case 4:
-                            e.Graphics.DrawImage(_imageJ_25, j * 25, i * 25);
+                            e.Graphics.DrawImage(_imageJ_25, j * BLOCK_SIZE, i * BLOCK_SIZE);
                             break;
                         case 5:
-                            e.Graphics.DrawImage(_imageZ_25, j * 25, i * 25);
+                            e.Graphics.DrawImage(_imageZ_25, j * BLOCK_SIZE, i * BLOCK_SIZE);
                             break;
                         case 6:
-                            e.Graphics.DrawImage(_imageT_25, j * 25, i * 25);
+                            e.Graphics.DrawImage(_imageT_25, j * BLOCK_SIZE, i * BLOCK_SIZE);
                             break;
                         case 7:
-                            e.Graphics.DrawImage(_imageS_25, j * 25, i * 25);
+                            e.Graphics.DrawImage(_imageS_25, j * BLOCK_SIZE, i * BLOCK_SIZE);
                             break;
                     }
+                }
+
+            }
         }
 #region Свойства
         /// <summary>
@@ -249,14 +257,14 @@ namespace Tetris
         /// <summary>
         /// Кнопка паузы
         /// </summary>
-        public Button PauseButton
+        public Button ButtonPause
         {
             get { return _buttonPause; }
         }
         /// <summary>
         /// Выход из игры
         /// </summary>
-        public Button ExitButton
+        public Button ButtonExit
         {
             get { return _buttonExit; }
         }
@@ -272,7 +280,7 @@ namespace Tetris
         /// <summary>
         /// Очки
         /// </summary>
-        public string ScoreLabel
+        public string LabelScore
         {
             get { return _labelScore.ToString(); }
             set { _labelScore.Text = value; }
@@ -280,7 +288,7 @@ namespace Tetris
         /// <summary>
         /// Уровень
         /// </summary>
-        public string LevelLabel
+        public string LabelLevel
         {
             get { return _labelLevel.ToString(); }
             set { _labelLevel.Text = value; }
@@ -288,7 +296,7 @@ namespace Tetris
         /// <summary>
         /// Форма для рисования
         /// </summary>
-        public FormGame GameForm
+        public FormGame FormGame
         {
             get { return _formGame; }
             set { _formGame = value; }

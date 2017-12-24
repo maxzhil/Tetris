@@ -10,7 +10,7 @@ using Tetris.View;
 namespace Tetris.Controller
 {
     /// <summary>
-    /// Контроллер формы игры
+    /// Контроллер игры
     /// </summary>
     public class ControllerGame
     {
@@ -23,21 +23,14 @@ namespace Tetris.Controller
         /// </summary>
         private ControllerEnterName _controllerEnterName;
         /// <summary>
-        /// Форма ввода имени 
-        /// </summary>
-        private FormEnterName _formEnterName = new FormEnterName();
-        /// <summary>
         /// Представление игры
         /// </summary>
         private GameView _gameView;
         /// <summary>
         /// Вью ввода имени
         /// </summary>
-        public EnterName _enterName;
-        /// <summary>
-        /// Контейнер 
-        /// </summary>
-        private Rectangle _containerShape;
+        public EnterNameView _enterNameView;
+        
         /// <summary>
         /// Фиксация фигуры 
         /// </summary>
@@ -50,27 +43,21 @@ namespace Tetris.Controller
         /// Уровень
         /// </summary>
         private int _level;
-        /// <summary>
-        /// Размер блоков
-        /// </summary>
-        private const int _blockSize = 25;
+     
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="parForm">Форма</param>
-        public ControllerGame(FormGame parForm)
+        public ControllerGame(Model parModel)
         {
-            _model = new Model();
-            parForm.KeyPreview = true;
-
-            this._gameView = new GameView(_model, parForm);
-            _gameView.GameForm.Paint += OnPaint;
+            _model = parModel;
+            _gameView = new GameView(_model);
+            _gameView.FormGame.Paint += OnPaint;
             _gameView.Timer.Tick += OnDraw;
-            _gameView.GameForm.KeyDown += FormKeyDown;
-            _gameView.PauseButton.MouseClick += PauseResumeGame;
-            _gameView.ExitButton.MouseClick += delegate { OpenFormEnterName();_gameView.GameForm.Close(); };
+            _gameView.FormGame.KeyDown += FormKeyDown;
+            _gameView.ButtonPause.MouseClick += PauseResumeGame;
+            _gameView.ButtonExit.MouseClick += ExitGame;
             _model.InitializeMatch();
-            _gameView.GameForm.ShowDialog();
+            _gameView.FormGame.ShowDialog();
         }
 
         /// <summary>
@@ -80,35 +67,33 @@ namespace Tetris.Controller
         /// <param name="e"></param>
         private void FormKeyDown(object sender, KeyEventArgs e)
         {
-            if (_gameView.GameForm != null)
+            if (_gameView.FormGame != null)
             {
                 if (!_inPause)
                     switch (e.KeyData)
                     {
                         case Keys.NumPad8:
                             _model.ShapeWheel();
-                            _gameView.GameForm.Refresh();
+                            _gameView.FormGame.Refresh();
                             break;
                         case Keys.NumPad5:
                             MoveDown();
-                            _gameView.GameForm.Refresh();
+                            _gameView.FormGame.Refresh();
                             break;
                         case Keys.NumPad4:
                             _model.MoveLeft();
-                            _containerShape.X -= _blockSize;
-                            _gameView.GameForm.Refresh();
+                            _gameView.FormGame.Refresh();
                             break;
                         case Keys.NumPad6:
                             _model.MoveRight();
-                            _containerShape.X += _blockSize;
-                            _gameView.GameForm.Refresh();
+                            _gameView.FormGame.Refresh();
                             break;
                     }
             }
         }
      
         /// <summary>
-        /// Пауза 
+        /// Остановка игры
         /// </summary>
         private void GameBreak()
         {
@@ -137,12 +122,23 @@ namespace Tetris.Controller
             else
                 ResumeGame();
         }
-
-
         /// <summary>
-        /// Уменьшение интервыла таймера
+        /// Выход из игры
         /// </summary>
-        private void DecreaseTimerRange()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitGame(object sender, MouseEventArgs e)
+        {
+            GameBreak();
+            OpenFormEnterName();
+            _gameView.FormGame.Close();
+        }
+
+
+            /// <summary>
+            /// Уменьшение интервыла таймера
+            /// </summary>
+            private void DecreaseTimerRange()
         {
             if (_gameView.TimerInterval >= 200)
                 _gameView.TimerInterval -= 50;
@@ -162,37 +158,32 @@ namespace Tetris.Controller
                     {
                         _model.ExtractShape();
                         _fixedShape = false;
-                        
-                        _gameView.ScoreLabel = "Score: " + _model.Score.ToString();
+                        _gameView.LabelScore = "Score: " + _model.Score.ToString();
                         if (_level < _model.Level)
                         {
                             DecreaseTimerRange();
                             _level = _model.Level;
-                            _gameView.LevelLabel = "Level: " + _level.ToString();
+                            _gameView.LabelLevel = "Level: " + _level.ToString();
                         }
                     }
                 }
             }
             else
             {
-                this._gameView.Timer.Enabled = false;
+                _gameView.Timer.Enabled = false;
                 _gameView.Timer.Stop();
                 OpenFormEnterName();                   
-                _gameView.GameForm.Close();
-                _gameView.GameForm = null;
-
+                _gameView.FormGame.Close();
+                _gameView.FormGame = null;
             }
 
         }
-        
         /// <summary>
         /// Открытие формы ввода имени
         /// </summary>
         private void OpenFormEnterName()
         {
-
-            _controllerEnterName = new ControllerEnterName(_formEnterName,_model);
-
+            _controllerEnterName = new ControllerEnterName(_model);
         }
         /// <summary>
         /// Обработка отрисовки модели.
@@ -202,8 +193,8 @@ namespace Tetris.Controller
         private void OnDraw(object sender, EventArgs e)
         {
             MoveDown();
-            if (_gameView.GameForm != null)
-                _gameView.GameForm.Refresh();
+            if (_gameView.FormGame != null)
+                _gameView.FormGame.Refresh();
         }
 
         /// <summary>
@@ -213,9 +204,7 @@ namespace Tetris.Controller
         /// <param name="e"></param>
         private void OnPaint(object sender, PaintEventArgs e)
         {
-            
-            e.Graphics.FillRectangle(_gameView.Brush, _gameView.Sidebar);
-            _gameView.GameForm.BackColor = Color.DimGray;
+            _gameView.FormGame.BackColor = Color.DimGray;
             _gameView.DrawBlocks(e);
             _gameView.DrawShape(_model.CurrentShape, e);
             _gameView.DrawNextShape(_model.NextShape, e);

@@ -49,8 +49,7 @@ namespace Tetris
         {
             { 1, 1, 1, 1 }
         };
-
-
+        
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -71,7 +70,9 @@ namespace Tetris
 
             parDirectionRotation++;
             if (parDirectionRotation % 4 == 0)
+            {
                 parDirectionRotation = 0;
+            }
 
             switch (parDirectionRotation)
             {
@@ -102,8 +103,9 @@ namespace Tetris
 
             nextRotation++;
             if (nextRotation % 4 == 0)
+            {
                 nextRotation = 0;
-
+            }
             switch (nextRotation)
             {
                 case 0:
@@ -132,7 +134,9 @@ namespace Tetris
 
             nextRotation++;
             if (nextRotation % 4 == 0)
+            {
                 nextRotation = 0;
+            }
 
             switch (nextRotation)
             {
@@ -160,7 +164,9 @@ namespace Tetris
 
             _rotation++;
             if (_rotation % 4 == 0)
+            {
                 _rotation = 0;
+            }
             imageI.RotateFlip(RotateFlipType.Rotate90FlipNone);
 
             switch (_rotation)

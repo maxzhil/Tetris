@@ -16,11 +16,11 @@ namespace Tetris
         /// </summary>
         private const char NAME = 'Z';
         /// <summary>
-        /// координата _x
+        /// координата x
         /// </summary>
         private int _x;
         /// <summary>
-        /// координата _y
+        /// координата y
         /// </summary>
         private int _y;
         /// <summary>

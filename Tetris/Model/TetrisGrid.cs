@@ -22,7 +22,7 @@ namespace Tetris
         /// <summary>
         /// Игровое поле
         /// </summary>
-        private static int[,] _grid = new int[GRID_LINES, GRID_COLUMS];
+        private static int[,] _gameGrid = new int[GRID_LINES, GRID_COLUMS];
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -38,16 +38,16 @@ namespace Tetris
         {
             for (int i = 0; i < GRID_LINES; i++)
                 for (int j = 0; j < GRID_COLUMS; j++)
-                    _grid[i, j] = 0;
+                    _gameGrid[i, j] = 0;
         }
 
         /// <summary>
         /// Игровое поле
         /// </summary>
-        public int[,] Grid
+        public int[,] GameGrid
         {
-            get { return _grid; }
-            set { _grid = value; }
+            get { return _gameGrid; }
+            set { _gameGrid = value; }
         }
     }
 }

@@ -12,16 +12,13 @@ namespace Tetris.Controller
     public class ControllerMenu
     {
         /// <summary>
-        /// Форма меню
-        /// </summary>
-        private FormGame _formGame;
-       
-        /// <summary>
         /// Главное меню
         /// </summary>
         private MenuView _menuView;
-       
-
+        /// <summary>
+        /// Модель
+        /// </summary>
+        private Model _model = Model.GetInstance();
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -41,8 +38,7 @@ namespace Tetris.Controller
         /// <param name="e"></param>
         public void PlayGame(object sender, MouseEventArgs e)
         {
-            _formGame = new FormGame();
-            var controllerGame = new ControllerGame(_formGame);
+            new ControllerGame(_model);
         }
         /// <summary>
         /// Просмотр результатов
@@ -51,7 +47,7 @@ namespace Tetris.Controller
         /// <param name="e"></param>
         public void ViewScore(object sender, MouseEventArgs e)
         {
-            var controller = new ControllerViewScore();
+            new ControllerViewScore(_model);
         }
     }
 }

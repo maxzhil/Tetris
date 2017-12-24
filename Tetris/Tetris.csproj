@@ -50,7 +50,7 @@
     <Compile Include="Controller\ControllerEnterName.cs" />
     <Compile Include="Controller\ControllerViewScore.cs" />
     <Compile Include="View\AbstractView.cs" />
-    <Compile Include="View\EnterName.cs" />
+    <Compile Include="View\EnterNameView.cs" />
     <Compile Include="View\FormEnterName.cs">
       <SubType>Form</SubType>
     </Compile>

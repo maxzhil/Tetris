@@ -16,9 +16,9 @@ namespace Tetris
         /// </summary>
         private Random rnd = new Random();
         /// <summary>
-        /// Создание формы
+        /// Создание фигуры
         /// </summary>
-        /// <returns>Форма</returns>
+        /// <returns>Фигуры</returns>
         public Shape CreateShape()
         {
             Shape currentShape = null;
@@ -47,7 +47,6 @@ namespace Tetris
                     currentShape = new ShapeZ();
                     break;
             }
-
             return currentShape;
         }
     }
