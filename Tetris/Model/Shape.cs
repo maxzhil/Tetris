@@ -29,7 +29,7 @@ namespace Tetris
         /// </summary>
         public abstract void Wheel();
         /// <summary>
-        /// Координата _x
+        /// Координата x
         /// </summary>
         public abstract int X
         {
@@ -37,7 +37,7 @@ namespace Tetris
             set;
         }
         /// <summary>
-        /// Координата _y
+        /// Координата y
         /// </summary>
         public abstract int Y
         {
@@ -71,6 +71,7 @@ namespace Tetris
         public abstract int Rotation
         {
             get;
+            set;
         }
     }
 

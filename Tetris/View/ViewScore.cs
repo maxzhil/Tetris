@@ -48,6 +48,7 @@ namespace Tetris.View
             _dataGrid.Location = new Point(10, 10);
             _dataGrid.Width = 250;
             _dataGrid.Height = 300;
+            _dataGrid.ReadOnly = true;
             _formViewRecord.Controls.Add(_dataGrid);
             _buttonExit.Text = "Exit";
             _buttonExit.Location = new Point(300, 200);

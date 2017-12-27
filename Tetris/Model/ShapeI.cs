@@ -15,17 +15,17 @@ namespace Tetris
         /// <summary>
         /// Изображение
         /// </summary>
-        private Image imageI = Tetris.Properties.Resources.imageI;
+        private Image _imageI = Properties.Resources.imageI;
         /// <summary>
         /// Сокращенное обозначение фигуры
         /// </summary>
-        public const char NAME = 'I';
+        private const char NAME = 'I';
         /// <summary>
-        /// координата _x
+        /// Координата x
         /// </summary>
         private int _x;
         /// <summary>
-        /// координата _y
+        /// Координата y
         /// </summary>
         private int _y;
         /// <summary>
@@ -35,7 +35,7 @@ namespace Tetris
         /// <summary>
         /// Шаблонное расположение 0- градусов
         /// </summary>
-        private int[,] pattern0 = new int[4, 1]
+        private int[,] _pattern0 = new int[4, 1]
         {
             { 1 },
             { 1 },
@@ -45,7 +45,7 @@ namespace Tetris
         /// <summary>
         /// Шаблонное расположение 90- градусов
         /// </summary>
-        private int[,] pattern90 = new int[1, 4]
+        private int[,] _pattern90 = new int[1, 4]
         {
             { 1, 1, 1, 1 }
         };
@@ -57,7 +57,7 @@ namespace Tetris
         {
             X = 4;
             Y = 0;
-            _rotation = 0;
+            Rotation = 0;
         }
         /// <summary>
         /// Получение матрицы для вращения
@@ -77,16 +77,16 @@ namespace Tetris
             switch (parDirectionRotation)
             {
                 case 0:
-                    currentPattern = pattern0;
+                    currentPattern = _pattern0;
                     break;
                 case 1:
-                    currentPattern = pattern90;
+                    currentPattern = _pattern90;
                     break;
                 case 2:
-                    currentPattern = pattern0;
+                    currentPattern = _pattern0;
                     break;
                 case 3:
-                    currentPattern = pattern90;
+                    currentPattern = _pattern90;
                     break;
             }
 
@@ -98,7 +98,7 @@ namespace Tetris
         /// <returns></returns>
         public override int NextRotationX()
         {
-            int nextX = this._x;
+            int nextX =_x;
             int nextRotation = _rotation;
 
             nextRotation++;
@@ -129,10 +129,11 @@ namespace Tetris
         /// <returns></returns>
         public override int NextRotationY()
         {
-            int nextY = this._y;
+            int nextY = _y;
             int nextRotation = _rotation;
 
             nextRotation++;
+            
             if (nextRotation % 4 == 0)
             {
                 nextRotation = 0;
@@ -162,30 +163,30 @@ namespace Tetris
         public override void Wheel()
         {
 
-            _rotation++;
-            if (_rotation % 4 == 0)
+            Rotation++;
+            if (Rotation % 4 == 0)
             {
-                _rotation = 0;
+                Rotation = 0;
             }
-            imageI.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            _imageI.RotateFlip(RotateFlipType.Rotate90FlipNone);
 
-            switch (_rotation)
+            switch (Rotation)
             {
                 case 0:
-                    _y -= 2;
-                    _x++;
+                    Y -= 2;
+                    X++;
                     break;
                 case 1:
-                    _y++;
-                    _x--;
+                    Y++;
+                    X--;
                     break;
                 case 2:
-                    _x += 2;
-                    _y--;
+                    X += 2;
+                    Y--;
                     break;
                 case 3:
-                    _x -= 2;
-                    _y += 2;
+                    X -= 2;
+                    Y += 2;
                     break;
             }
         }
@@ -203,19 +204,19 @@ namespace Tetris
             {
                 int[,] currentPattern = null;
 
-                switch (_rotation)
+                switch (Rotation)
                 {
                     case 0:
-                        currentPattern = pattern0;
+                        currentPattern = _pattern0;
                         break;
                     case 1:
-                        currentPattern = pattern90;
+                        currentPattern = _pattern90;
                         break;
                     case 2:
-                        currentPattern = pattern0;
+                        currentPattern = _pattern0;
                         break;
                     case 3:
-                        currentPattern = pattern90;
+                        currentPattern = _pattern90;
                         break;
                 }
                 return currentPattern;
@@ -227,7 +228,21 @@ namespace Tetris
         /// </summary>
         public override int Rotation
         {
-            get { return _rotation; }
+            get
+            {
+                return _rotation;
+            }
+            set
+            {
+                if (value < 0 || value >= 5)
+                {
+                    throw new Exception("Поворот не может быть меньше 0 и больше 4");
+                }
+                else
+                {
+                    _rotation = value;
+                }
+            }
         }
 
         /// <summary>
@@ -235,16 +250,42 @@ namespace Tetris
         /// </summary>
         public override int X
         {
-            get { return _x; }
-            set { _x = value; }
+            get
+            {
+                return _x;
+            }
+            set
+            {
+                if (value < 0 || value >= 11)
+                {
+                    throw new Exception("Координата x не может быть меньше 0 и больше 11");
+                }
+                else
+                {
+                    _x = value;
+                }
+            }
         }
         /// <summary>
         /// Координата у
         /// </summary>
         public override int Y
         {
-            get { return _y; }
-            set { _y = value; } 
+            get
+            {
+                return _y;
+            }
+            set
+            {
+                if (value <0 || value >= 17)
+                {
+                    throw new Exception("Координата y не может быть меньше 0 и больше 16");
+                }
+                else
+                {
+                    _y = value;
+                }
+            } 
         }
 
         /// <summary>
@@ -252,14 +293,20 @@ namespace Tetris
         /// </summary>
         public override char Name
         {
-            get { return NAME; }
+            get
+            {
+                return NAME;
+            }
         }
         /// <summary>
         /// Изображение
         /// </summary>
         public override Image Image
         {
-            get { return imageI; }
+            get
+            {
+                return _imageI;
+            }
         }
 #endregion
     }

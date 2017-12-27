@@ -30,7 +30,6 @@ namespace Tetris.Controller
         /// Вью ввода имени
         /// </summary>
         public EnterNameView _enterNameView;
-        
         /// <summary>
         /// Фиксация фигуры 
         /// </summary>
@@ -134,11 +133,10 @@ namespace Tetris.Controller
             _gameView.FormGame.Close();
         }
 
-
-            /// <summary>
-            /// Уменьшение интервыла таймера
-            /// </summary>
-            private void DecreaseTimerRange()
+        /// <summary>
+        /// Уменьшение интервыла таймера
+        /// </summary>
+        private void DecreaseTimerRange()
         {
             if (_gameView.TimerInterval >= 200)
                 _gameView.TimerInterval -= 50;

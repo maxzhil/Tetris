@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-
+using System;
 namespace Tetris
 {
     /// <summary>
@@ -10,7 +10,7 @@ namespace Tetris
         /// <summary>
         /// Изображение
         /// </summary>
-        private Image imageO = Tetris.Properties.Resources.imageO;
+        private Image _imageO = Properties.Resources.imageO;
         /// <summary>
         /// Сокращенное обозначение фигуры
         /// </summary>
@@ -26,11 +26,11 @@ namespace Tetris
         /// <summary>
         /// Поворот
         /// </summary>
-        private int _rotazione;
+        private int _rotation;
         /// <summary>
         /// Шаблонное расположение 0- градусов
         /// </summary>
-        private int[,] pattern0 = new int[2, 2]
+        private int[,] _pattern0 = new int[2, 2]
         {
             { 2, 2 },
             { 2, 2 }
@@ -41,9 +41,9 @@ namespace Tetris
         /// </summary>
         public ShapeSquare()
         {
-            this._x = 4;
-            this._y = 0;
-            this._rotazione = 0;
+            X = 4;
+            Y = 0;
+            Rotation = 0;
         }
         
         /// <summary>
@@ -51,7 +51,7 @@ namespace Tetris
         /// </summary>
         public override void Wheel()
         {
-            _rotazione = 0;
+            Rotation = 0;
         }
 
         
@@ -62,7 +62,7 @@ namespace Tetris
         /// <returns>Шаблонное расположеие</returns>
         public override int[,] NextRotation(int parDirectionRotation)
         {
-            return pattern0;
+            return Pattern;
         }
         /// <summary>
         /// Новая координата х при вращении
@@ -70,7 +70,7 @@ namespace Tetris
         /// <returns></returns>
         public override int NextRotationX()
         {
-            return this._x;
+            return _x;
         }
         /// <summary>
         /// Новая координата _y при вращении
@@ -78,7 +78,7 @@ namespace Tetris
         /// <returns></returns>
         public override int NextRotationY()
         {
-            return this._y;
+            return _y;
         }
 
         #region Свойства
@@ -92,7 +92,7 @@ namespace Tetris
         {
             get
             {
-                return pattern0;
+                return _pattern0;
             }
         }
         /// <summary>
@@ -102,7 +102,18 @@ namespace Tetris
         {
             get
             {
-                return _rotazione;
+                return _rotation;
+            }
+            set
+            {
+                 if (value < 0 || value >= 5)
+                {
+                    throw new Exception("Поворот не может быть меньше 0 и больше 4");
+                }
+                else
+                {
+                    _rotation = value;
+                }
             }
         }
         /// <summary>
@@ -110,7 +121,10 @@ namespace Tetris
         /// </summary>
         public override char Name
         {
-            get { return NAME; }
+            get
+            {
+                return NAME;
+            }
         }
         /// <summary>
         /// Изображение
@@ -119,7 +133,7 @@ namespace Tetris
         {
             get
             {
-                return imageO;
+                return _imageO;
             }
         }
 
@@ -134,7 +148,14 @@ namespace Tetris
             }
             set
             {
-                _x = value;
+                if (value < 0 || value >= 11)
+                {
+                    throw new Exception("Координата x не может быть меньше 0 и больше 11");
+                }
+                else
+                {
+                    _x = value;
+                }
             }
         }
         /// <summary>
@@ -148,7 +169,14 @@ namespace Tetris
             }
             set
             {
-                _y = value;
+                if (value < 0 || value >= 17)
+                {
+                    throw new Exception("Координата y не может быть меньше 0 и больше 16");
+                }
+                else
+                {
+                    _y = value;
+                }
             }
         }
 
