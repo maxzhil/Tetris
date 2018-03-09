@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Tetris.GameView">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACEACQIBgAEgACIABgAAhDgCBEICCEAAIAggCAAkCQA=</HashCode>
+      <FileName>View\GameView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.View.MenuView">
+    <Position X="3.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCAAAAAAAAAgAAAAAAAAAAgBAgAAAAAAAAAABAAAAgg=</HashCode>
+      <FileName>View\MenuView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.View.ViewScore">
+    <Position X="1.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAABAABAAAAAAAAAACgAgAAAAAAAABQAAAAgAAA=</HashCode>
+      <FileName>View\ViewScore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.View.EnterNameView">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAIAAAAQAgAAAgAAAAgAAIwgAIAAAAAAIQAAAgA=</HashCode>
+      <FileName>View\EnterNameView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.View.AbstractView">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\AbstractView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -46,6 +46,10 @@ namespace Tetris
         /// Список игроков
         /// </summary>
         public List<User> _users = new List<User>();
+        /// <summary>
+        /// Количество упавших фигур
+        /// </summary>
+        private int _countShape = 1;
 
         /// <summary>
         /// Конструктор
@@ -123,14 +127,14 @@ namespace Tetris
         /// <summary>
         /// Сохранить результаты
         /// </summary>
-        /// <param name="name">Имя</param>
-        /// <param name="score">Очки</param>
-        public void SaveScore(string name, int score)
+        /// <param name="parName">Имя</param>
+        /// <param name="parScore">Очки</param>
+        public void SaveScore(string parName, int parScore)
         {
             var User = new User()
             {
                 Score = _score,
-                Name = name
+                Name = parName
             };
 
             _users.Add(User);
@@ -176,6 +180,7 @@ namespace Tetris
             }
             else
             {
+                _countShape++;
                 _currentShape = _nextShape;
                 _nextShape = _shapeCreator.CreateShape();
             }
@@ -186,16 +191,16 @@ namespace Tetris
         /// <summary>
         /// Проверка возможности перемещения
         /// </summary>
-        /// <param name="x">Координата х</param>
-        /// <param name="y">Координата у</param>
+        /// <param name="parX">Координата х</param>
+        /// <param name="parY">Координата у</param>
         /// <returns></returns>
-        private bool CanMove(int x, int y)
+        private bool CanMove(int parX, int parY)
         {
             bool canMove = true;
 
-            for (int i = y, line = 0; i < (y + CurrentShapeLines); i++, line++)
+            for (int i = parY, line = 0; i < (parY + CurrentShapeLines); i++, line++)
             {
-                for (int j = x, column = 0; j < (x + CurrentShapeColumns); j++, column++)
+                for (int j = parX, column = 0; j < (parX + CurrentShapeColumns); j++, column++)
                 {
                     if ((_tetrisGrid.GameGrid[i, j] != 0) && (_currentShape.Pattern[line, column] != 0))
                     {
@@ -424,6 +429,20 @@ namespace Tetris
             private set
             {
                 _level = value;
+            }
+        }
+        /// <summary>
+        /// Количество упавших фигур
+        /// </summary>
+        public int CountShape
+        {
+            get
+            {
+                return _countShape;
+            }
+            set
+            {
+                _countShape = value;
             }
         }
         /// <summary>

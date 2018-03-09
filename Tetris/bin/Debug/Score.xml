@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="Tetris">
+  <User>
+    <Score>400</Score>
+    <Name>max</Name>
+  </User>
+  <User>
+    <Score>0</Score>
+    <Name>S</Name>
+  </User>
+  <User>
+    <Score>360</Score>
+    <Name>Timi</Name>
+  </User>
+  <User>
+    <Score>610</Score>
+    <Name>maxim</Name>
+  </User>
+  <User>
+    <Score>600</Score>
+    <Name>maxim</Name>
+  </User>
+  <User>
+    <Score>600</Score>
+    <Name>846466846846846</Name>
+  </User>
+</ArrayOfUser>

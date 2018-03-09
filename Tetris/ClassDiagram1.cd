@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Tetris.Shape">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAARQAADAABAQAAAAAAAAYAA=</HashCode>
+      <FileName>Model\Shape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.ShapeI">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAKAAAAIAAQAAIAQAAAAAARQAADAABAQAAAAAAAAYEA=</HashCode>
+      <FileName>Model\ShapeI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.ShapeJ">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgIAAQAIAAQAAIAQAAAAAARQAADAABAQAAAAAAAAYEQ=</HashCode>
+      <FileName>Model\ShapeJ.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.ShapeL">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgIAAAAIAAQAAIAQAAAAAARQEADAABAQAAAAAAAAYEQ=</HashCode>
+      <FileName>Model\ShapeL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.ShapeS">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAIIAAQAAIAQAAAAAARQAADAABAQAAAAAAAAYEA=</HashCode>
+      <FileName>Model\ShapeS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.ShapeSquare">
+    <Position X="2.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAIAAQAAIAQAAAAAARQAADAABAQAAAAAAAAYEA=</HashCode>
+      <FileName>Model\ShapeSquare.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.ShapeT">
+    <Position X="11.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgIABAAIAAQAAIAQAAAAAARQAADAABAQAAAAAAAAYEQ=</HashCode>
+      <FileName>Model\ShapeT.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.ShapeZ">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAJAAQAAIAQAAAAAARQAADAABAQAAAAAAAAYEA=</HashCode>
+      <FileName>Model\ShapeZ.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Tetris.ShapeTypes">
+    <Position X="6" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAABAAEAAAAAAAAAAEBAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Model\ShapeTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

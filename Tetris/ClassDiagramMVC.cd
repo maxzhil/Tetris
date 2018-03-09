@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Tetris.Model">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIAEkaQoICAAAgkBIAgBAQAgBAAAAJAJQEAAQAAAAAE=</HashCode>
+      <FileName>Model\Model.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.ControllerEnterName">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAgAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Controller\ControllerEnterName.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.Controller.ControllerGame">
+    <Position X="5.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAQIAAAEAEAAAAiDAEQAAAAAAAAAAQIAACgBAAAA=</HashCode>
+      <FileName>Controller\ControllerGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.Controller.ControllerMenu">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAABAgAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controller\ControllerMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.Controller.ControllerViewScore">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIQAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controller\ControllerViewScore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tetris.View.AbstractView">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\AbstractView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

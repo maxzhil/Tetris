@@ -22,6 +22,10 @@ namespace Tetris.View
         /// </summary>
         private Label _score = new Label();
         /// <summary>
+        /// Кличество упавших фигур
+        /// </summary>
+        private Label _countShape = new Label();
+        /// <summary>
         /// Поле ввода имени
         /// </summary>
         private TextBox _textBoxName = new TextBox();
@@ -67,6 +71,10 @@ namespace Tetris.View
             _enterForm.Controls.Add(_name);
             _textBoxName.Location = new Point(10, 25);
             _enterForm.Controls.Add(_textBoxName);
+            _countShape.Location = new Point(120, 10);
+            _countShape.Text = "Count Shape :"+_model.CountShape;
+            _countShape.Height = 15;
+            _enterForm.Controls.Add(_countShape);
             _score.Location = new Point(10, 50);
             _score.Text = "Score :";
             _score.Height = 15;

@@ -42,6 +42,7 @@ namespace Tetris.Controller
         /// Уровень
         /// </summary>
         private int _level;
+        
      
         /// <summary>
         /// Конструктор
@@ -117,9 +118,13 @@ namespace Tetris.Controller
         private void PauseResumeGame(object sender, MouseEventArgs e)
         {
             if (_gameView.Timer.Enabled == true)
+            {
                 GameBreak();
+            }
             else
+            {
                 ResumeGame();
+            }
         }
         /// <summary>
         /// Выход из игры
@@ -131,6 +136,7 @@ namespace Tetris.Controller
             GameBreak();
             OpenFormEnterName();
             _gameView.FormGame.Close();
+            _model.CountShape = 1;
         }
 
         /// <summary>
@@ -170,7 +176,8 @@ namespace Tetris.Controller
             {
                 _gameView.Timer.Enabled = false;
                 _gameView.Timer.Stop();
-                OpenFormEnterName();                   
+                OpenFormEnterName();
+                _model.CountShape = 1;
                 _gameView.FormGame.Close();
                 _gameView.FormGame = null;
             }
